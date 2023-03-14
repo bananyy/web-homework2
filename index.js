@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(addUserRouter);
 app.use(getUserRouter);
 app.use(addLinkRouter);
+app.use(getLinkRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server started ${process.env.PORT}`);
