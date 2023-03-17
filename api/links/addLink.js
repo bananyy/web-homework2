@@ -4,7 +4,7 @@ const { Users } = require('../../models/users');
 
 const router = Router();
 
-router.use(async (req, res, next) => {
+router.use('/links', async (req, res, next) => {
   const apiKey = req.header('x-api-key');
 
   const user = await Users.findOne({ apiKey: apiKey });
@@ -20,7 +20,7 @@ router.post('/links', async (req, res) => {
   const { original } = req.body;
 
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let cutLink = 'https://';
+  let cutLink = '';
 
   for (let i = 0; i < 15; i++) {
     cutLink += characters.charAt(Math.floor(Math.random() * characters.length));
