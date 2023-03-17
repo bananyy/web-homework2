@@ -21,8 +21,8 @@ router.get('/links', async (req, res) => {
 
   const links = await Link.find({
     $or: [
-      { expiredAt: { $gt: new Date(gt) } },
-      { expiredAt: { $lt: new Date(lt) } },
+      { expiredAt: { $gt: Date(gt) } },
+      { expiredAt: { $lt: Date(lt) } },
     ],
   }).catch((error) => {
     res.status(400).json(error);
