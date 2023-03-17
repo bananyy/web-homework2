@@ -9,7 +9,19 @@ router.post('/users', async (req, res) => {
 
   const user = new Users({ email, password, apiKey: uuidv4() });
 
-  const result = await user.save();
+  if (!email) {
+    res.status(400).json({ message: `This field email is required` });
+  }
+
+  if (!password) {
+    res.status(400).json({ message: `This field password is required` });
+  }
+
+  const result = await user.save().catch((error) => {
+    if (error.code == 11000) {
+      res.status(400).json({ message: 'This email is already in use' });
+    }
+  });
 
   res.status(200).send(result);
 });
